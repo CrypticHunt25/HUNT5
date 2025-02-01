@@ -4,228 +4,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cryptic Hunt</title>
+    <title>Step 3: Caesar Cipher Puzzle</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-image: url('https://i.pinimg.com/474x/a9/43/68/a94368a43e3dd26099894ee2584c7476.jpg'); /
+            background-image: url('https://i.pinimg.com/474x/12/d3/5b/12d35b5609f2e6fb14adc841486e0187.jpg');
             background-size: cover;
-            color: white;
-            text-align: center;
+            color: #f5deb3;
+            font-family: 'Georgia', serif;
             margin: 0;
             padding: 0;
         }
-
-        h1 {
-            font-size: 3em;
-            margin-top: 20px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-        }
-
-        h2 {
-            font-size: 1.5em;
-            margin-top: 10px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-        }
-
-        .puzzle-container {
-            margin-top: 40px;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 30px;
-            border-radius: 10px;
-            width: 60%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .puzzle-instructions {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
-
-        .crossword-grid {
-            margin: 20px auto;
-            display: grid;
-            grid-template-columns: repeat(15, 30px);
-            grid-gap: 2px;
-            justify-content: center;
-        }
-
-        .crossword-grid div {
-            width: 30px;
-            height: 30px;
+        .container {
             text-align: center;
-            line-height: 30px;
-            font-size: 1.2em;
-            border: 1px solid #fff;
-            background-color: rgba(0, 0, 0, 0.7);
+            padding: 50px;
+        }
+        .welcome {
+            font-size: 2rem;
+            color: #ffd700;
+            text-shadow: 2px 2px 5px #000;
+            animation: fadeIn 2s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .puzzle {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            box-shadow: 0 0 20px #ffd700;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 20px #ffd700; }
+            50% { box-shadow: 0 0 30px #ff4500; }
+            100% { box-shadow: 0 0 20px #ffd700; }
+        }
+        .puzzle p {
+            font-size: 1.2rem;
+        }
+        input[type="text"] {
+            width: 50%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #ffd700;
+            font-size: 1rem;
+            background: rgba(0, 0, 0, 0.6);
+            color: #ffd700;
+            outline: none;
+            transition: box-shadow 0.3s;
+        }
+        input[type="text"]:focus {
+            box-shadow: 0 0 10px #ff4500;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 10px;
+            background: #ff4500;
+            color: #fff;
             cursor: pointer;
+            box-shadow: 0 0 10px #ffd700;
+            transition: background 0.3s;
         }
-
-        .crossword-grid div.found {
-            background-color: #ffcc00;
+        button:hover {
+            background: #ffd700;
             color: #000;
-            font-weight: bold;
-        }
-
-        .footer {
-            margin-top: 40px;
-            font-size: 1.1em;
-        }
-
-        .footer a {
-            color: #ffcc00;
-            text-decoration: none;
         }
     </style>
+    <script>
+        document.addEventListener("contextmenu", (e) => e.preventDefault());
+        function checkAnswer() {
+            const input = document.getElementById('answer').value.trim().toLowerCase();
+            if (input === "this is the parseltongue’s speech") {
+                alert("Correct! Proceeding to the next step.");
+                window.location.href = "step4.html";
+            } else {
+                alert("Incorrect answer. Try again!");
+            }
+        }
+    </script>
 </head>
 <body>
-
-    <header>
-        <h1>Cryptic Hunt: Harry potter</h1>
-        <h2>Clue 4: The Hidden Words</h2>
-    </header>
-
-    <div class="puzzle-container">
-        <div class="puzzle-instructions">
-            <p>Your mission is simple: Find the three key words hidden in the crossword puzzle below. These words will lead you closer to solving the mystery!</p>
-            <p><strong>Words to find:</strong> Answers of the clues!!</p>
-            class="clue-section">
-            <h3>Clues:</h3>
-            <h4>Crossword 1:</h4>
-            <ul>
-                <li>1 The boy who lived.</li>
-                <li>2 The Weasleys' flying car used this principle to stay airborne.</li>
-            </ul>
-
-            <h4>Crossword 2:</h4>
-            <ul>
-                <li>1 The study of forces and motion.</li>
-                <li>2 The enchanted brooms in Quidditch defy this force.</li>
-            </ul>
-
-            <h4>Crossword 3:</h4>
-            <ul>
-                <li>1 Hogwart's house of bravery.</li>
-                <li>2 The enchanted ceiling of the Great Hall mimics this optical phenomenon.</li>
-            </ul>
-        </div>
-
-        <!-- Crossword Grid -->
-        <div class="crossword-grid" id="crosswordGrid">
-            <!-- Dynamically generated puzzle cells go here -->
-        </div>
-
-        <div class="footer">
-            <p>Once you've found all three words, move on to the next clue! <a href="#"></a></p>
+    <div class="container">
+        <div class="welcome">✨ Well done! You've advanced to Step 2! ✨</div>
+        <div class="puzzle">
+            <p><strong>Clue:</strong></p>
+            <p>"Wkh Erb Zkr Olyhg"</p>
+            <p><strong>Hint:</strong>  "Take three steps back, like rewinding time."</p>
+            <input type="text" id="answer" placeholder="Enter your answer here">
+            <br>
+            <button onclick="checkAnswer()">Submit</button>
         </div>
     </div>
-
-    <script>
-        const crossword = [
-            ["R", "A", "K", "R", "G", "B", "Z", "M", "I", "H", "Q", "W", "V", "L", "T"],
-            ["E", "U", "I", "C", "E", "A", "X", "H", "P", "R", "O", "B", "W", "F", "A"],
-            ["F", "D", "A", "E", "R", "O", "D", "Y", "N", "A", "M", "I", "C", "S", "G"],
-            ["L", "B", "U", "L", "O", "L", "I", "A", "R", "K", "E", "R", "F", "H", "R"],
-            ["E", "N", "S", "M", "B", "K", "R", "M", "D", "L", "B", "R", "E", "A", "Y"],
-            ["C", "Q", "O", "B", "B", "R", "R", "W", "O", "S", "A", "D", "N", "R", "F"],
-            ["T", "A", "P", "R", "Y", "L", "T", "P", "L", "E", "W", "O", "C", "R", "F"],
-            ["I", "E", "E", "A", "S", "R", "E", "P", "G", "I", "K", "R", "K", "Y", "I"],
-            ["O", "U", "O", "H", "A", "U", "N", "D", "G", "E", "E", "F", "L", "G", "N"],
-            ["N", "R", "B", "I", "A", "Q", "K", "E", "O", "I", "R", "B", "P", "E", "D"],
-            ["S", "U", "G", "K", "L", "Q", "N", "D", "I", "R", "L", "N", "C", "T", "O"],
-            ["M", "H", "P", "R", "T", "S", "K", "O", "L", "U", "E", "V", "Z", "S", "R"],
-            ["L", "L", "S", "R", "A", "M", "F", "O", "X", "D", "B", "C", "P", "P", "H"],
-            ["M", "E", "T", "A", "M", "O", "R", "P", "H", "O", "S", "I", "S", "F", "F"],
-            ["T", "G", "B", "2", "2", "1", "B", "R", "E", "G", "Y", "Q", "P", "E", "N"],
-            ["K", "O", "W", "A", "Z", "J", "T", "N", "G", "R", "A", "V", "I", "T", "Y"]
-        ];
-
-        const wordsToFind = ['HARRY', 'AERODYNAMICS', 'DYNAMICS', 'GRAVITY', 'GRYFFINDOR',  'REFLECTION'];
-        let foundWords = [];  // Store found words
-        let selectedCells = [];
-        const crosswordGridElement = document.getElementById("crosswordGrid");
-
-        // Function to render the crossword grid
-        function renderGrid() {
-            crossword.forEach((row, rowIndex) => {
-                row.forEach((letter, colIndex) => {
-                    let cell = document.createElement("div");
-                    cell.textContent = letter;
-                    cell.dataset.row = rowIndex;
-                    cell.dataset.col = colIndex;
-                    crosswordGridElement.appendChild(cell);
-
-                    cell.addEventListener('click', () => handleCellClick(cell));
-                });
-            });
-        }
-
-        // Function to handle cell clicks (select/deselect)
-        function handleCellClick(cell) {
-            const row = parseInt(cell.dataset.row);
-            const col = parseInt(cell.dataset.col);
-            const letter = crossword[row][col];
-
-            // Check if the cell is already selected
-            const cellIndex = selectedCells.findIndex(selected => selected.row === row && selected.col === col);
-
-            if (cellIndex === -1) {
-                // Not selected, so select it
-                selectedCells.push({ row, col, letter });
-                cell.classList.add('found');
-            } else {
-                // Already selected, so deselect it
-                selectedCells.splice(cellIndex, 1);
-                cell.classList.remove('found');
-            }
-
-            // Check if we found a word
-            checkWord(selectedCells);
-        }
-
-        // Function to check if a word has been found (checking horizontally, vertically, diagonally)
-        function checkWord(selectedCells) {
-            let word = selectedCells.map(cell => cell.letter).join('');
-            if (wordsToFind.includes(word) && !foundWords.includes(word)) {
-                foundWords.push(word); // Add word to found words list
-                alert('You found a word: ' + word);
-                highlightFoundWord(word);
-                deselectWord(selectedCells);
-            }
-
-            // Check if all words have been found
-            if (foundWords.length === wordsToFind.length) {
-                window.location.href ="step3.html";
-            }
-        }
-
-        // Function to highlight the found word in the grid
-        function highlightFoundWord(word) {
-            selectedCells.forEach(cell => {
-                if (word.includes(cell.letter)) {
-                    const cellElement = crosswordGridElement.children[cell.row * crossword.length + cell.col];
-                    cellElement.classList.add('found');
-                }
-            });
-        }
-
-        // Function to deselect the word after it's found
-        function deselectWord(selectedCells) {
-            selectedCells.forEach(cell => {
-                const cellElement = crosswordGridElement.children[cell.row * crossword.length + cell.col];
-                cellElement.classList.remove('found');
-            });
-            selectedCells = []; // Reset the selected cells
-        }
-
-        // Function to display a completion message when all words are found
-       
-       
-
-        // Render the grid
-        renderGrid();
-    </script>
-
 </body>
 </html>
