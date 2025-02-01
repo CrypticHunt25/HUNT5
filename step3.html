@@ -77,13 +77,13 @@
     <script>
         function checkAnswer() {
             const input = document.getElementById('answer').value.trim().toLowerCase();
-            const correctAnswer = "map2346";
+            const correctAnswer = "hat2346";
 
             if (input === correctAnswer) {
                 document.getElementById('feedback').textContent = "Correct! Proceed to the next step.";
                 document.getElementById('feedback').className = "success";
                 setTimeout(() => {
-                    window.location.href = "step3.html"; // Link to Step 3
+                    window.location.href = "step4.html"; // Link to Step 3
                 }, 2000);
             } else {
                 alert("Incorrect answer. Try again!");
